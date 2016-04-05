@@ -10,13 +10,15 @@ namespace PluggTo\Lib;
 
 class PluggRequest
 {
+    const CLIENT_ID     = '5de98c314871a4f1970eb387e937db5c';
+    const CLIENT_SECRET = '8f4074857cee508fa69f938a8f53ebad';
 
     public function getAccessToken($code) 
     {
         $url = 'https://api.plugg.to/oauth/token';
 
-        $data = "grant_type=authorization_code&client_id=5de98c314871a4f1970eb387e937db5c&client_secret=8f4074857cee508fa69f938a8f53ebad&code=" . $code;
-
+        $data = "grant_type=authorization_code&client_id=" . CLIENT_ID . "&client_secret=" . CLIENT_SECRET . "&code=" . $code;
+        
         $curl_handle = curl_init();
 
         curl_setopt($curl_handle, CURLOPT_URL, $url);
