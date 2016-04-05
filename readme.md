@@ -24,6 +24,8 @@ Depois só rodar
 
 ```composer update```
 
+Mude também as constantes em library/PluggRequest.php
+
 # Contribuindo
 
 Crie issues com bugs ou corrija bugs, todos os pull requests serão analisados e aceitos.
