@@ -1,8 +1,8 @@
-[Namespace](#namespace)
+# [Namespace](#namespace)
 
 ``` PluggProduct ```
 
-[Criar Produto](#add)
+# [Criar Produto](#add)
 
 Segue exemplo do código
 
@@ -25,7 +25,7 @@ $this->PluggProduct->sendProductToPlugg();
 
 ```
 
-[Editar Produto](#edit)
+# [Editar Produto](#edit)
 
 A edição é igual a edição porém, o dado comparado para edição é o sku, não esqueça dele.
 
@@ -48,7 +48,7 @@ $this->PluggProduct->sendProductToPlugg();
 
 ```
 
-[Deletar Produto](#delete)
+# [Deletar Produto](#delete)
 
 Sete o sku e chame a função delete(), exemplo;
 
