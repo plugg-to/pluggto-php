@@ -10,17 +10,17 @@ Você pode instalar esse sdk utilizando o composer, basta colocar o seguinte dad
 {
     "repositories": [
         {
-            "url": "https://github.com/l3pp4rd/DoctrineExtensions.git",
+            "url": "https://reginaldopluggto@bitbucket.org/pluggto/pluggto-php.git",
             "type": "git"
         }
     ],
     "require": {
-        "gedmo/doctrine-extensions": "~2.3"
+        "pluggto/pluggto-php": "master"
     }
 }
 ```
 
-Depois, só rodar 
+Depois só rodar 
 
 ```composer update```
 

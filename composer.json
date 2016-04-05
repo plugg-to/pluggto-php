@@ -1,5 +1,5 @@
 {
-    "name": "pluggto/sdk-php",
+    "name": "pluggto/pluggto-php",
     "description": "A Library PHP to communication API Plugg.To",
     "keywords": ["pluggto", "api", "library", "sdk", "mercadolivre", "integração", "magento", "opencart"],
     "type": "library",
