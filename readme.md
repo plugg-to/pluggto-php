@@ -30,9 +30,9 @@ Crie issues com bugs ou corrija bugs, todos os pull requests serão analisados e
 
 # Produtos
  
-Criar um produto [Exemplo](https://bitbucket.org/pluggto/pluggto-php/src/master/docs/produtos.md?at=master&fileviewer=file-view-default#add)
-Editar um produto [Exemplo](https://bitbucket.org/pluggto/pluggto-php/src/master/docs/produtos.md?at=master&fileviewer=file-view-default#edit)
-Deletar um produto [Exemplo](https://bitbucket.org/pluggto/pluggto-php/src/master/docs/produtos.md?at=master&fileviewer=file-view-default#delete)
+	- Criar um produto [Exemplo](https://bitbucket.org/pluggto/pluggto-php/src/master/docs/produtos.md?at=master&fileviewer=file-view-default#add)
+	- Editar um produto [Exemplo](https://bitbucket.org/pluggto/pluggto-php/src/master/docs/produtos.md?at=master&fileviewer=file-view-default#edit)
+	- Deletar um produto [Exemplo](https://bitbucket.org/pluggto/pluggto-php/src/master/docs/produtos.md?at=master&fileviewer=file-view-default#delete)
 
 # Pedidos
 
