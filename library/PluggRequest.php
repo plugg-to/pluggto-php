@@ -12,31 +12,37 @@ class PluggRequest
 {
     const CLIENT_ID     = '5de98c314871a4f1970eb387e937db5c';
     const CLIENT_SECRET = '8f4074857cee508fa69f938a8f53ebad';
+    const API_USER      = '';
+    const PASSWORD      = '';
+    const TYPE          = 'APP';
 
     public function getAccessToken($code) 
     {
         $url = 'https://api.plugg.to/oauth/token';
 
-        $data = "grant_type=authorization_code&client_id=" . CLIENT_ID . "&client_secret=" . CLIENT_SECRET . "&code=" . $code;
-        
-        $curl_handle = curl_init();
+        if (TYPE == 'APP') 
+        {
+            $data = "grant_type=authorization_code&client_id=" . CLIENT_ID . "&client_secret=" . CLIENT_SECRET . "&code=" . $code;
+            
+            $response = $this->sendRequest("post", $url, $params);
 
-        curl_setopt($curl_handle, CURLOPT_URL, $url);
-        curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl_handle, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curl_handle, CURLOPT_POST, 1);
-        curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($curl_handle, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+            return $response['access_token'];
+        }
 
-        $response = curl_exec($curl_handle);
+        if (TYPE == 'PLUGIN')
+        {
+            $params = [
+                "grant_type"    => "password", 
+                "client_id"     => CLIENT_ID, 
+                "client_secret" => CLIENT_SECRET,
+                "username"      => API_USER,
+                "password"      => PASSWORD
+            ];
 
-        $responseCode = curl_getinfo($curl_handle, CURLINFO_HTTP_CODE);
-
-        $resultResponse = json_decode($response);
-
-        curl_close($curl_handle);
-        
-        return $resultResponse->access_token;
+            $response = $this->sendRequest("post", $url, $params);
+            
+            return $response['access_token'];
+        }
     }
 
 

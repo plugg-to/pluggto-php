@@ -1,6 +1,6 @@
 <?php
 
-namespace PluggTo\Lib;
+namespace PluggTo\Lib\Product;
 
 class PluggProductTest extends \PHPUnit_Framework_TestCase {
 
@@ -76,7 +76,7 @@ class PluggProductTest extends \PHPUnit_Framework_TestCase {
 		$this->PluggProduct->quantity = rand(1, 10);
 		$this->PluggProduct->price = number_format(rand(1, 1000));
 		$this->PluggProduct->dimension = ['weight' => 2];
-		$this->PluggProduct->access_token = "99bdb9e87da095d5d95d1cfa30493b1e897eac6a";
+		$this->PluggProduct->access_token = "6f1a8f1015fc482e052835ba1673fee208e4381b";
 		
 		$response = $this->PluggProduct->sendProductToPlugg();
 		
