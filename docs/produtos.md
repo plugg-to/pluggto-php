@@ -1,6 +1,6 @@
 # [Namespace](#namespace)
 
-``` PluggProduct ```
+``` PluggTo\Lib\Product\PluggProduct ```
 
 # [Criar Produto](#add)
 
@@ -9,7 +9,7 @@ Segue exemplo do código
 ``` 
 <?php
 
-use PluggProduct;
+use PluggTo\Lib\Product\PluggProduct;
 
 $PluggProduct = new PluggProduct;
 
@@ -32,7 +32,7 @@ A edição é igual a edição porém, o dado comparado para edição é o sku, 
 ``` 
 <?php
 
-use PluggProduct;
+use PluggTo\Lib\Product\PluggProduct;
 
 $PluggProduct = new PluggProduct;
 
@@ -55,7 +55,7 @@ Sete o sku e chame a função delete(), exemplo;
 ``` 
 <?php
 
-use PluggProduct;
+use PluggTo\Lib\Product\PluggProduct;
 
 $PluggProduct = new PluggProduct;
 
