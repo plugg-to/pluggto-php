@@ -22,7 +22,7 @@ class PluggRequest
 
         if (TYPE == 'APP') 
         {
-            $data = "grant_type=authorization_code&client_id=" . CLIENT_ID . "&client_secret=" . CLIENT_SECRET . "&code=" . $code;
+            $data = "grant_type=authorization_code&client_id=" . self::CLIENT_ID . "&client_secret=" . self::CLIENT_SECRET . "&code=" . $code;
             
             $response = $this->sendRequest("post", $url, $params);
 
@@ -33,10 +33,10 @@ class PluggRequest
         {
             $params = [
                 "grant_type"    => "password", 
-                "client_id"     => CLIENT_ID, 
-                "client_secret" => CLIENT_SECRET,
-                "username"      => API_USER,
-                "password"      => PASSWORD
+                "client_id"     => self::CLIENT_ID, 
+                "client_secret" => self::CLIENT_SECRET,
+                "username"      => self::API_USER,
+                "password"      => self::PASSWORD
             ];
 
             $response = $this->sendRequest("post", $url, $params);
