@@ -11,6 +11,12 @@ namespace PluggTo\Lib\Order;
 interface PluggInterfaceOrder
 {
 
+	public function getDataPreparedToPlugg();
 
+	public function get();
+
+	public function edit();
+
+	public function add();
 
 }

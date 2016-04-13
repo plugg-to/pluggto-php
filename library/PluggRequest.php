@@ -46,7 +46,7 @@ class PluggRequest
     }
 
 
-    public function sendRequest($method, $url, $params) {
+    public function sendRequest($method, $url, $params=[]) {
         $ch = curl_init();
 
         if (strtolower ( $method ) == "get")  {
