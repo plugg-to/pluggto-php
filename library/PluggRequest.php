@@ -2,6 +2,8 @@
 
 namespace PluggTo\Lib;
 
+use Exception;
+
 /**
 * Class of Request to Apps Plugg.To
 * @author Reginaldo Junior 
@@ -10,38 +12,49 @@ namespace PluggTo\Lib;
 
 class PluggRequest
 {
-    const CLIENT_ID     = '5de98c314871a4f1970eb387e937db5c';
-    const CLIENT_SECRET = '8f4074857cee508fa69f938a8f53ebad';
-    const API_USER      = '';
-    const PASSWORD      = '';
-    const TYPE          = 'APP';
+    public $CLIENT_ID     = '';
+    public $CLIENT_SECRET = '';
+    public $API_USER      = '';
+    public $PASSWORD      = '';
+    public $TYPE          = 'APP';
 
-    public function getAccessToken($code) 
+    public function getAccessToken($code=null) 
     {
         $url = 'https://api.plugg.to/oauth/token';
 
-        if (TYPE == 'APP') 
+        if ($this->TYPE == 'APP') 
         {
-            $data = "grant_type=authorization_code&client_id=" . self::CLIENT_ID . "&client_secret=" . self::CLIENT_SECRET . "&code=" . $code;
+            $params = [
+                "grant_type"    => "authorization_code",
+                "client_id"     => $this->CLIENT_ID,
+                "client_secret" => $this->CLIENT_SECRET,
+                "code"          => $code
+            ];
             
             $response = $this->sendRequest("post", $url, $params);
 
-            return $response['access_token'];
+            if (!isset($response->access_token))
+                throw new Exception($response->message);
+
+            return $response->access_token;                
         }
 
-        if (TYPE == 'PLUGIN')
+        if ($this->TYPE == 'PLUGIN')
         {
             $params = [
                 "grant_type"    => "password", 
-                "client_id"     => self::CLIENT_ID, 
-                "client_secret" => self::CLIENT_SECRET,
-                "username"      => self::API_USER,
-                "password"      => self::PASSWORD
+                "client_id"     => $this->CLIENT_ID, 
+                "client_secret" => $this->CLIENT_SECRET,
+                "username"      => $this->API_USER,
+                "password"      => $this->PASSWORD
             ];
 
             $response = $this->sendRequest("post", $url, $params);
             
-            return $response['access_token'];
+            if (!isset($response->access_token))
+                throw new Exception($response->message);
+
+            return $response->access_token;                
         }
     }
 

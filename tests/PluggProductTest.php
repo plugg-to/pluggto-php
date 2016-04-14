@@ -76,7 +76,7 @@ class PluggProductTest extends \PHPUnit_Framework_TestCase {
 		$this->PluggProduct->quantity = rand(1, 10);
 		$this->PluggProduct->price = number_format(rand(1, 1000));
 		$this->PluggProduct->dimension = ['weight' => 2];
-		$this->PluggProduct->access_token = "6ef8bd27692f262478cf9ddc20924902351413da";
+		$this->PluggProduct->access_token = "d431a3852d5e89c55c2af51c0482357c290031b9";
 		
 		$response = $this->PluggProduct->sendProductToPlugg();
 		

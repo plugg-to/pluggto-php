@@ -9,7 +9,7 @@ class PluggOrderTest extends \PHPUnit_Framework_TestCase {
 	public function setUp()
 	{
         $this->PluggOrder = new PluggOrder();
-        $this->PluggOrder->access_token = "6ef8bd27692f262478cf9ddc20924902351413da";
+        $this->PluggOrder->access_token = "d431a3852d5e89c55c2af51c0482357c290031b9";
 	}
 
 	public function testGetAllOrders()
