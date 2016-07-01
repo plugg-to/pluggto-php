@@ -58,6 +58,22 @@ class PluggRequest
         }
     }
 
+    public function getAccessTokenByRefreshToken($refreshToken)
+    {
+        $params = [
+            "grant_type"    => "refresh_token", 
+            "client_id"     => $this->CLIENT_ID, 
+            "client_secret" => $this->CLIENT_SECRET,
+            "refresh_token" => $refreshToken
+        ];
+
+        $response = $this->sendRequest("post", $url, $params);
+        
+        if (!isset($response->access_token))
+            throw new Exception($response->message);
+
+        return $response->access_token;       
+    }
 
     public function sendRequest($method, $url, $params=[]) {
         $ch = curl_init();
