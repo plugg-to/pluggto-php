@@ -72,7 +72,7 @@ class PluggRequest
         if (!isset($response->access_token))
             throw new Exception($response->message);
 
-        return $response->access_token;       
+        return $response;       
     }
 
     public function sendRequest($method, $url, $params=[]) {
