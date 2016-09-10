@@ -60,6 +60,8 @@ class PluggRequest
 
     public function getAccessTokenByRefreshToken($refreshToken)
     {
+        $url = 'https://api.plugg.to/oauth/token';
+        
         $params = [
             "grant_type"    => "refresh_token", 
             "client_id"     => $this->CLIENT_ID, 
