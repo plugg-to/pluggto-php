@@ -41,6 +41,9 @@ class PluggOrder extends ValidationOrderPlugg implements PluggInterfaceOrder
 	public $receiver_email;
 	public $receiver_schedule_date;
 	public $receiver_schedule_period;
+	public $receiver_additional_info;
+	public $receiver_address_complement;
+	public $receiver_address_reference;
 	public $delivery_type;
 	public $payer_name;
 	public $payer_lastname;
