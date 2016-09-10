@@ -61,7 +61,7 @@ class PluggRequest
     public function getAccessTokenByRefreshToken($refreshToken)
     {
         $url = 'https://api.plugg.to/oauth/token';
-        
+
         $params = [
             "grant_type"    => "refresh_token", 
             "client_id"     => $this->CLIENT_ID, 
@@ -74,10 +74,10 @@ class PluggRequest
         if (!isset($response->access_token))
             throw new Exception($response->message);
 
-        return $response;       
+        return $response->access_token;       
     }
 
-    public function sendRequest($method, $url, $params=[]) {
+    public function sendRequest($method, $url, $params=[], $type="") {
         $ch = curl_init();
 
         if (strtolower ( $method ) == "get")  {
@@ -107,8 +107,21 @@ class PluggRequest
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+
+            $data_string = json_encode($params);
+
+            if ($type != "orders") {
+                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+            } 
+            else {
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                    'Content-Type: application/json',
+                    'Content-Length: ' . strlen($data_string))
+                );
+            }
+
 
         } elseif (strtolower ( $method ) == "put") {
 

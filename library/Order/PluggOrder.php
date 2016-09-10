@@ -41,9 +41,6 @@ class PluggOrder extends ValidationOrderPlugg implements PluggInterfaceOrder
 	public $receiver_email;
 	public $receiver_schedule_date;
 	public $receiver_schedule_period;
-	public $receiver_additional_info;
-	public $receiver_address_complement;
-	public $receiver_address_reference;
 	public $delivery_type;
 	public $payer_name;
 	public $payer_lastname;
@@ -129,9 +126,11 @@ class PluggOrder extends ValidationOrderPlugg implements PluggInterfaceOrder
 			'payer_razao_social' => $this->payer_razao_social,
 			'payer_ie' => $this->payer_ie,
 			'payer_gender' => $this->payer_gender,
-			'shipments' => $this->shipments,
 			'items' => $this->items,
 		];
+		
+		if(isset($this->shipments) && !empty($this->shipments))
+			$response['shipments'] = $this->shipments;
 
 		$this->validate($response);
 
@@ -188,7 +187,7 @@ class PluggOrder extends ValidationOrderPlugg implements PluggInterfaceOrder
 	    
 	    $url = $url . "?access_token=" . $this->access_token;
 	    
-	    $data = $this->pluggRequest->sendRequest($method, $url, $params);
+	    $data = $this->pluggRequest->sendRequest($method, $url, $params, "orders");
 	    
 	    return $data;
 	}
