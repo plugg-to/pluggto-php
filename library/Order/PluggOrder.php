@@ -134,6 +134,8 @@ class PluggOrder extends ValidationOrderPlugg implements PluggInterfaceOrder
 
 		$this->validate($response);
 
+		$this->removeFieldsNull($response);
+
 		return $response;
 	}
 

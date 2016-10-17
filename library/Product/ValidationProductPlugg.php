@@ -34,4 +34,13 @@ abstract class ValidationProductPlugg
 		}
 	}
 
+	public function removeFieldsNull(&$input)
+	{
+		foreach ($input as $key => $value) 
+		{
+			if (empty($value) || !isset($value))
+				unset($input[$key]);
+		}
+	}
+
 }

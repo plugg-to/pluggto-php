@@ -71,6 +71,8 @@ class PluggProduct extends ValidationProductPlugg implements PluggInterfaceProdu
 
 		$this->validate($response);
 
+		$this->removeFieldsNull($response);
+		
 		return $response;
 	}
 

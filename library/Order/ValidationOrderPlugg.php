@@ -66,4 +66,13 @@ abstract class ValidationOrderPlugg
 		return true;
 	}
 
+	public function removeFieldsNull(&$input)
+	{
+		foreach ($input as $key => $value) 
+		{
+			if (empty($value) || !isset($value))
+				unset($input[$key]);
+		}
+	}
+
 }

@@ -76,12 +76,40 @@ class PluggProductTest extends \PHPUnit_Framework_TestCase {
 		$this->PluggProduct->quantity = rand(1, 10);
 		$this->PluggProduct->price = number_format(rand(1, 1000));
 		$this->PluggProduct->dimension = ['weight' => 2];
-		$this->PluggProduct->access_token = "d431a3852d5e89c55c2af51c0482357c290031b9";
+		$this->PluggProduct->access_token = "e152419c6cf7c18b898448da1688241fb8fe8917";
 		
 		$response = $this->PluggProduct->sendProductToPlugg();
 		
 		$this->assertNotEmpty($response);
 		$this->assertEquals($response->Product->name, 'Teste');
 	}
+
+	public function testSendQuantityEmptyAndGetArrayResponse()
+	{
+		$this->PluggProduct->name = 'teste';
+		$this->PluggProduct->sku = 'teste';
+		$this->PluggProduct->quantity = '';
+
+		$this->assertEquals($this->PluggProduct->getDataPreparedToPlugg(), ['name' => 'teste', 'sku' => 'teste']);
+	}
+
+	public function testSendQuantityNullAndGetArrayResponse()
+	{
+		$this->PluggProduct->name = 'teste';
+		$this->PluggProduct->sku = 'teste';
+		$this->PluggProduct->quantity = null;
+
+		$this->assertEquals($this->PluggProduct->getDataPreparedToPlugg(), ['name' => 'teste', 'sku' => 'teste']);
+	}
+
+	public function testSendQuantityAndGetArrayResponse()
+	{
+		$this->PluggProduct->name = 'teste';
+		$this->PluggProduct->sku = 'teste';
+		$this->PluggProduct->quantity = 23;
+
+		$this->assertEquals($this->PluggProduct->getDataPreparedToPlugg(), ['quantity' => 23, 'name' => 'teste', 'sku' => 'teste']);
+	}
+
 
 }
