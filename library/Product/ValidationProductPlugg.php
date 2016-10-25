@@ -14,9 +14,6 @@ abstract class ValidationProductPlugg
 {
 
 	protected $rules = [
-		'name' => [
-			'required' => true
-		],
 		'sku' => [
 			'required' => true
 		]
