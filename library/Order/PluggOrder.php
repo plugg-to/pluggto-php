@@ -17,6 +17,8 @@ class PluggOrder extends ValidationOrderPlugg implements PluggInterfaceOrder
 
 	public $id;
 	public $external;
+	public $original_id;
+	public $channel;
 	public $status;
 	public $total;
 	public $subtotal;
@@ -80,6 +82,8 @@ class PluggOrder extends ValidationOrderPlugg implements PluggInterfaceOrder
 		$response = [
 			'external' => $this->external,
 			'status' => $this->status,
+			'channel' => $this->channel,
+			'original_id' => $this->original_id,
 			'total' => $this->total,
 			'subtotal' => $this->subtotal,
 			'shipping' => $this->shipping,
