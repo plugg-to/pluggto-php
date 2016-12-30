@@ -34,7 +34,7 @@ class PluggRequest
             $response = $this->sendRequest("post", $url, $params);
 
             if (!isset($response->access_token))
-                throw new Exception($response->message);
+                return false;
 
             return $response->access_token;                
         }
@@ -52,7 +52,7 @@ class PluggRequest
             $response = $this->sendRequest("post", $url, $params);
             
             if (!isset($response->access_token))
-                throw new Exception($response->message);
+                return false;
 
             return $response->access_token;                
         }
@@ -72,7 +72,7 @@ class PluggRequest
         $response = $this->sendRequest("post", $url, $params);
         
         if (!isset($response->access_token))
-            throw new Exception($response->message);
+            return false;
 
         return $response->access_token;       
     }
