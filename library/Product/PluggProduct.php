@@ -45,7 +45,7 @@ class PluggProduct extends ValidationProductPlugg implements PluggInterfaceProdu
 	{
 		$response = [
 			'name' 				=> $this->name,
-			'sku'  				=> trim($this->sku),
+			'sku'  				=> trim(str_replace('/', '-', $this->sku)),
 			'external'  		=> $this->external,
 			'quantity'  		=> $this->quantity,
 			'price'				=> $this->price,
@@ -132,7 +132,7 @@ class PluggProduct extends ValidationProductPlugg implements PluggInterfaceProdu
 	{
 		$pluggRequest = new PluggRequest;
 
-	    $url = "http://api.plugg.to/skus/" . trim($this->sku);
+	    $url = "http://api.plugg.to/skus/" . trim(str_replace('/', '-', $this->sku));
 	    
 	    $method = "put";
 	    
