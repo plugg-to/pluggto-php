@@ -35,7 +35,7 @@ abstract class ValidationProductPlugg
 	{
 		foreach ($input as $key => $value) 
 		{
-			if (empty($value) || !isset($value))
+			if ((empty($value) || !isset($value)) && $value !== 0) {
 				unset($input[$key]);
 		}
 	}
