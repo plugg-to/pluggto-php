@@ -58,7 +58,7 @@ class PluggRequest
         }
     }
 
-    public function getAccessTokenByRefreshToken($refreshToken)
+    public function getAccessTokenByRefreshToken($refreshToken, $returnAllTokens = false)
     {
         $url = 'https://api.plugg.to/oauth/token';
 
@@ -73,6 +73,11 @@ class PluggRequest
         
         if (!isset($response->access_token))
             return false;
+
+        if($returnAllTokens)
+        {
+            return $response;
+        }
 
         return $response->access_token;       
     }
