@@ -31,7 +31,7 @@ class PluggRequest
                 "code"          => $code
             ];
             
-            $response = $this->sendRequest("post", $url, $params);
+            $response = $this->sendRequest("post", $url, $params, "auth");
 
             if (!isset($response->access_token))
                 return false;
@@ -47,7 +47,7 @@ class PluggRequest
                 "password"      => $this->PASSWORD
             ];
 
-            $response = $this->sendRequest("post", $url, $params);
+            $response = $this->sendRequest("post", $url, $params, "auth");
             
             if (!isset($response->access_token))
                 return false;          
@@ -70,9 +70,9 @@ class PluggRequest
             "client_secret" => $this->CLIENT_SECRET,
             "refresh_token" => $refreshToken
         ];
-
-        $response = $this->sendRequest("post", $url, $params);
         
+        $response = $this->sendRequest("post", $url, $params, "auth");
+
         if (!isset($response->access_token))
             return false;
 
@@ -117,11 +117,20 @@ class PluggRequest
 
             $data_string = json_encode($params);
 
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Content-Type: application/json',
-                'Content-Length: ' . strlen($data_string))
-            );
+            var_dump($type);
+            if ($type == "auth") {
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'))
+                ));
+            } else {
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                    'Content-Type: application/json',
+                    'Content-Length: ' . strlen($data_string))
+                );
+            }
         } elseif (strtolower ( $method ) == "put") {
 
             $data_string = json_encode($params);
