@@ -117,7 +117,6 @@ class PluggRequest
 
             $data_string = json_encode($params);
 
-            var_dump($type);
             if ($type == "auth") {
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
