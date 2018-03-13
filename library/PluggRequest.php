@@ -18,7 +18,7 @@ class PluggRequest
     public $PASSWORD      = '';
     public $TYPE          = 'APP';
 
-    public function getAccessToken($code=null) 
+    public function getAccessToken($code=null, $returnRefreshToken=false) 
     {
         $url = 'https://api.plugg.to/oauth/token';
 
@@ -35,8 +35,6 @@ class PluggRequest
 
             if (!isset($response->access_token))
                 return false;
-
-            return $response->access_token;                
         }
 
         if ($this->TYPE == 'PLUGIN')
@@ -52,10 +50,14 @@ class PluggRequest
             $response = $this->sendRequest("post", $url, $params);
             
             if (!isset($response->access_token))
-                return false;
-
-            return $response->access_token;                
+                return false;          
         }
+        
+        if ($returnRefreshToken) {
+            return $response;
+        }
+        
+        return $response->access_token; 
     }
 
     public function getAccessTokenByRefreshToken($refreshToken, $returnAllTokens = false)
