@@ -17,6 +17,7 @@ class PluggRequest
     public $API_USER      = '';
     public $PASSWORD      = '';
     public $TYPE          = 'APP';
+    public $tries         = 0;
 
     public function getAccessToken($code=null, $returnRefreshToken=false) 
     {
@@ -155,9 +156,21 @@ class PluggRequest
             );
         }
 
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT_MS, 1000);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+
         $result = curl_exec($ch);
+
+        // get the curl status
+        $status = curl_getinfo($ch);
+
+        if (empty($status['http_code'])) {
+            if ($this->tries < 10) {
+                $this->tries++;
+                return $this->sendRequest($method, $url, $params, $type);
+            }
+        }
 
         return json_decode($result);
     }
-
 }
