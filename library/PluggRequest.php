@@ -156,6 +156,7 @@ class PluggRequest
             );
         }
 
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT_MS, 1000);
         curl_setopt($ch, CURLOPT_TIMEOUT, 60);
 
