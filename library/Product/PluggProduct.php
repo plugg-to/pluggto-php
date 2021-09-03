@@ -21,6 +21,7 @@ class PluggProduct extends ValidationProductPlugg implements PluggInterfaceProdu
 	public $attributes;
 	public $variations;	
 	public $sku;
+	public $ncm;
 	public $external;
 	public $quantity;
 	public $price;
@@ -46,6 +47,7 @@ class PluggProduct extends ValidationProductPlugg implements PluggInterfaceProdu
 		$response = [
 			'name' 				=> $this->name,
 			'sku'  				=> trim(str_replace('/', '-', $this->sku)),
+			'ncm'				=> $this->ncm,
 			'external'  		=> $this->external,
 			'quantity'  		=> $this->quantity,
 			'price'				=> $this->price,
