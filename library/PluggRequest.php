@@ -87,11 +87,17 @@ class PluggRequest
 
     public function sendRequest($method, $url, $params=[], $type="") {
         $ch = curl_init();
+        $bearer = null;
 
         if (strtolower ( $method ) == "get")  {
             $i =0;
             
             foreach ($params as $key => $value) {
+                
+                if ($key == 'access_token') {
+                    $bearer = "Authorization: Bearer ".$value;
+                    continue;
+                }
 
                 if ($i == 0) {
                     $value = "?".$key."=".$value;
@@ -106,7 +112,10 @@ class PluggRequest
 
             curl_setopt_array($ch, array(
                 CURLOPT_RETURNTRANSFER => 1,
-                CURLOPT_URL => $url
+                CURLOPT_URL => $url,
+                CURLOPT_HTTPHEADER =>  array_filter([ $bearer,
+                    'Content-Type: application/json'
+                    ])
             ));
 
         } elseif (strtolower ( $method ) == "post") {
@@ -126,9 +135,9 @@ class PluggRequest
                 ));
             } else {
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array_filter([$bearer
                     'Content-Type: application/json',
-                    'Content-Length: ' . strlen($data_string))
+                    'Content-Length: ' . strlen($data_string)]
                 );
             }
         } elseif (strtolower ( $method ) == "put") {
@@ -140,9 +149,9 @@ class PluggRequest
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array_filter($bearer,
                 'Content-Type: application/json',
-                'Content-Length: ' . strlen($data_string))
+                'Content-Length: ' . strlen($data_string)]
             );
 
         } else if (strtolower ( $method ) == "delete") {
@@ -150,10 +159,9 @@ class PluggRequest
 
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array_filter([$bearer,
                     'Content-Type: application/json'
-                )
-            );
+                ]);
         }
 
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
