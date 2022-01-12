@@ -7,10 +7,10 @@ use PluggTo\Lib\PluggRequest;
 use Exception;
 
 /**
-* Class to connection API Plugg.To
-* @author Reginaldo Junior 
-* @copyright Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
-**/
+ * Class to connection API Plugg.To
+ * @author Reginaldo Junior 
+ * @copyright Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ **/
 
 class PluggProduct extends ValidationProductPlugg implements PluggInterfaceProduct
 {
@@ -19,7 +19,7 @@ class PluggProduct extends ValidationProductPlugg implements PluggInterfaceProdu
 	public $name;
 	public $photos;
 	public $attributes;
-	public $variations;	
+	public $variations;
 	public $sku;
 	public $ncm;
 	public $external;
@@ -41,7 +41,7 @@ class PluggProduct extends ValidationProductPlugg implements PluggInterfaceProdu
 	public $dimension;
 	public $code;
 	public $access_token;
-	
+
 	public function getDataPreparedToPlugg()
 	{
 		$response = [
@@ -74,7 +74,7 @@ class PluggProduct extends ValidationProductPlugg implements PluggInterfaceProdu
 		$this->validate($response);
 
 		$this->removeFieldsNull($response);
-		
+
 		return $response;
 	}
 
@@ -85,23 +85,20 @@ class PluggProduct extends ValidationProductPlugg implements PluggInterfaceProdu
 
 		$response = [];
 
-		foreach ($this->categories as $i => $categorie)
-		{
-			if (is_object($categorie))
-			{
+		foreach ($this->categories as $i => $categorie) {
+			if (is_object($categorie)) {
 				$categorie = objectToArray($categorie);
 			}
 
-			if (!isset($categorie['name']))
-			{
-         		throw new Exception('Name category not defined');
+			if (!isset($categorie['name'])) {
+				throw new Exception('Name category not defined');
 				break;
 			}
 
 			$response[] = [
 				'name' => $categorie['name']
 			];
-		}			
+		}
 
 		return $response;
 	}
@@ -113,8 +110,7 @@ class PluggProduct extends ValidationProductPlugg implements PluggInterfaceProdu
 
 		$response = [];
 
-		foreach ($this->photos as $i => $photo)
-		{
+		foreach ($this->photos as $i => $photo) {
 			foreach ($photo as $key => $value) {
 				if (strpos($value, 'http://') !== false || strpos($value, 'https://') !== false)
 					$path = $value;
@@ -134,21 +130,20 @@ class PluggProduct extends ValidationProductPlugg implements PluggInterfaceProdu
 	{
 		$pluggRequest = new PluggRequest;
 
-	    $url = "http://api.plugg.to/skus/" . trim(str_replace('/', '-', $this->sku));
-	    
-	    $method = "put";
-	    
-	    if (empty($this->access_token)) {
-	    	$this->access_token = $pluggRequest->getAccesstoken($this->code);    	
-	    }
-	    
-	    $url = $url . "?access_token=" . $this->access_token;
-	    
-	    $params = $this->getDataPreparedToPlugg();
-	    
-	    $data = $pluggRequest->sendRequest($method, $url, $params);
-	    
-	    return $data;
-	}
+		$url = "https://api.plugg.to/skus/" . trim(str_replace('/', '-', $this->sku));
 
+		$method = "put";
+
+		if (empty($this->access_token)) {
+			$this->access_token = $pluggRequest->getAccesstoken($this->code);
+		}
+
+		$url = $url . "?access_token=" . $this->access_token;
+
+		$params = $this->getDataPreparedToPlugg();
+
+		$data = $pluggRequest->sendRequest($method, $url, $params);
+
+		return $data;
+	}
 }

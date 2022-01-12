@@ -7,10 +7,10 @@ use PluggTo\Lib\PluggRequest;
 use Exception;
 
 /**
-* Interface to connection API Plugg.To
-* @author Reginaldo Junior 
-* @copyright Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
-**/
+ * Interface to connection API Plugg.To
+ * @author Reginaldo Junior 
+ * @copyright Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ **/
 
 class PluggOrder extends ValidationOrderPlugg implements PluggInterfaceOrder
 {
@@ -132,8 +132,8 @@ class PluggOrder extends ValidationOrderPlugg implements PluggInterfaceOrder
 			'payer_gender' => $this->payer_gender,
 			'items' => $this->items,
 		];
-		
-		if(isset($this->shipments) && !empty($this->shipments))
+
+		if (isset($this->shipments) && !empty($this->shipments))
 			$response['shipments'] = $this->shipments;
 
 		$this->validate($response);
@@ -145,57 +145,56 @@ class PluggOrder extends ValidationOrderPlugg implements PluggInterfaceOrder
 
 	public function get()
 	{
-	    $url = "http://api.plugg.to/orders/" . trim($this->id);
-	    
-	    $method = "get";
-	    
-	    if (empty($this->access_token)) {
-	    	$this->access_token = $this->pluggRequest->getAccesstoken($this->code);    	
-	    }
-	    
-	    $url = $url . "?access_token=" . $this->access_token;
-	    
-	    $data = $this->pluggRequest->sendRequest($method, $url);
-	    
-	    return $data;
+		$url = "https://api.plugg.to/orders/" . trim($this->id);
+
+		$method = "get";
+
+		if (empty($this->access_token)) {
+			$this->access_token = $this->pluggRequest->getAccesstoken($this->code);
+		}
+
+		$url = $url . "?access_token=" . $this->access_token;
+
+		$data = $this->pluggRequest->sendRequest($method, $url);
+
+		return $data;
 	}
 
 	public function edit()
 	{
-	    $params = $this->getDataPreparedToPlugg();
+		$params = $this->getDataPreparedToPlugg();
 
-	    $url = "http://api.plugg.to/orders/" . trim($this->id);
-	    
-	    $method = "put";
-	    
-	    if (empty($this->access_token)) {
-	    	$this->access_token = $this->pluggRequest->getAccesstoken($this->code);    	
-	    }
-	    
-	    $url = $url . "?access_token=" . $this->access_token;
-	    
-	    $data = $this->pluggRequest->sendRequest($method, $url, $params);
-	    
-	    return $data;
+		$url = "https://api.plugg.to/orders/" . trim($this->id);
+
+		$method = "put";
+
+		if (empty($this->access_token)) {
+			$this->access_token = $this->pluggRequest->getAccesstoken($this->code);
+		}
+
+		$url = $url . "?access_token=" . $this->access_token;
+
+		$data = $this->pluggRequest->sendRequest($method, $url, $params);
+
+		return $data;
 	}
 
 	public function add()
 	{
-	    $params = $this->getDataPreparedToPlugg();
+		$params = $this->getDataPreparedToPlugg();
 
-	    $url = "http://api.plugg.to/orders";
-	    
-	    $method = "post";
-	    
-	    if (empty($this->access_token)) {
-	    	$this->access_token = $this->pluggRequest->getAccesstoken($this->code);    	
-	    }
-	    
-	    $url = $url . "?access_token=" . $this->access_token;
-	    
-	    $data = $this->pluggRequest->sendRequest($method, $url, $params, "orders");
-	    
-	    return $data;
+		$url = "https://api.plugg.to/orders";
+
+		$method = "post";
+
+		if (empty($this->access_token)) {
+			$this->access_token = $this->pluggRequest->getAccesstoken($this->code);
+		}
+
+		$url = $url . "?access_token=" . $this->access_token;
+
+		$data = $this->pluggRequest->sendRequest($method, $url, $params, "orders");
+
+		return $data;
 	}
-
 }
