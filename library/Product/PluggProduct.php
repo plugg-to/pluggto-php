@@ -134,7 +134,7 @@ class PluggProduct extends ValidationProductPlugg implements PluggInterfaceProdu
 	{
 		$pluggRequest = new PluggRequest;
 
-	    $url = "http://api.plugg.to/skus/" . trim(str_replace('/', '-', $this->sku));
+	    $url = "https://api.plugg.to/skus/" . trim(str_replace('/', '-', $this->sku));
 	    
 	    $method = "put";
 	    
