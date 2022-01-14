@@ -37,6 +37,7 @@ class PluggProduct extends ValidationProductPlugg implements PluggInterfaceProdu
 	public $origin;
 	public $available;
 	public $handling_time;
+	public $manufacture_time;
 	public $dimension;
 	public $code;
 	public $access_token;
@@ -62,6 +63,7 @@ class PluggProduct extends ValidationProductPlugg implements PluggInterfaceProdu
 			'origin'			=> $this->origin,
 			'available'			=> $this->available,
 			'handling_time'		=> $this->handling_time,
+			'manufacture_time' 	=> $this->manufacture_time,
 			'dimension'			=> $this->dimension,
 			'photos'			=> $this->photosToPlugg(),
 			'attributes'		=> $this->attributes,
