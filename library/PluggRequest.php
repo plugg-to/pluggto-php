@@ -135,9 +135,9 @@ class PluggRequest
                 ));
             } else {
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array_filter([$bearer
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array_filter([$bearer,
                     'Content-Type: application/json',
-                    'Content-Length: ' . strlen($data_string)]
+                    'Content-Length: ' . strlen($data_string)])
                 );
             }
         } elseif (strtolower ( $method ) == "put") {
@@ -149,9 +149,9 @@ class PluggRequest
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array_filter($bearer,
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array_filter([$bearer,
                 'Content-Type: application/json',
-                'Content-Length: ' . strlen($data_string)]
+                'Content-Length: ' . strlen($data_string)])
             );
 
         } else if (strtolower ( $method ) == "delete") {
