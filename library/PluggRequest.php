@@ -161,7 +161,7 @@ class PluggRequest
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array_filter([$bearer,
                     'Content-Type: application/json'
-                ]);
+                ]));
         }
 
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
