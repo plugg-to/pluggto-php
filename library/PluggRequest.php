@@ -88,7 +88,12 @@ class PluggRequest
     public function sendRequest($method, $url, $params=[], $type="") {
         $ch = curl_init();
         $bearer = null;
-
+        
+        if (isset($params['access_token'])) {
+            $bearer = "Authorization: Bearer " . $params['access_token'];
+            unset($params['access_token']);
+        }
+        
         if (strtolower ( $method ) == "get")  {
             $i =0;
             
