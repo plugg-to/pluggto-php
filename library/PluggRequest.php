@@ -18,6 +18,8 @@ class PluggRequest
     public $PASSWORD      = '';
     public $TYPE          = 'APP';
     public $tries         = 0;
+    
+    public $userId = null;
 
     public function getAccessToken($code=null, $returnRefreshToken=false) 
     {
@@ -139,25 +141,33 @@ class PluggRequest
                     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'))
                 ));
             } else {
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array_filter([$bearer,
+                $headers = [$bearer,
                     'Content-Type: application/json',
-                    'Content-Length: ' . strlen($data_string)])
-                );
+                    'Content-Length: ' . strlen($data_string)
+                ];
+                if($this->userId) {
+                    $headers[] = "x-user_id: " . $this->userId;
+                }
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array_filter($headers));
             }
         } elseif (strtolower ( $method ) == "put") {
-
             $data_string = json_encode($params);
+            
+            $headers = [$bearer,
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data_string)
+            ];
+            if($this->userId) {
+                $headers[] = "x-user_id: " . $this->userId;
+            }
 
             curl_setopt($ch, CURLOPT_URL, $url);
 
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array_filter([$bearer,
-                'Content-Type: application/json',
-                'Content-Length: ' . strlen($data_string)])
-            );
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array_filter($headers));
 
         } else if (strtolower ( $method ) == "delete") {
             curl_setopt($ch, CURLOPT_URL, $url);
